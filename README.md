@@ -1,155 +1,154 @@
-# Lab: Car Routes Lab
+# Lab: Introduction to Flask - Car Routes
 
----
+A small Flask application that demonstrates basic routing with a default route and a dynamic model route for a fictional car company.
 
-## Overview
+## Features
 
-Now it is time for you to build your own routes!
+The application includes two routes:
 
-You are building routes for a car company database. You will need to build:
+### Default Route
 
-- A **default route** introducing the company
-- A **model-specific route** for requesting information on a car model
+```text
+/
+```
 
----
+Returns:
 
-## Tasks
+```text
+Welcome to Flatiron Cars
+```
 
-### Task 1: Define the Problem
+### Model Route
 
-Build routes for a car company:
+```text
+/<model>
+```
 
-- `/` (default route)
-- `/<model>` (route for a specific car model)
+The route checks the requested model against the following available models:
 
----
+```python
+["Beedle", "Crossroads", "M2", "Panique"]
+```
 
-### Task 2: Determine the Design
+If the requested model exists, the application returns:
 
-#### App Routes:
+```text
+Flatiron {model} is in our fleet!
+```
 
-- `GET /`
-- `GET /<model>`
+Example:
 
----
+```text
+Flatiron Crossroads is in our fleet!
+```
 
-### Task 3: Develop the Code
+If the model does not exist, the application returns:
 
-- Initialize Flask
-- Set up `/` route
-- Set up `/<model>` route
+```text
+No models called {model} exists in our catalog
+```
 
----
+Example:
 
-### Task 4: Test and Refine
+```text
+No models called realCar exists in our catalog
+```
 
-- Debug and test during development using the provided test suite and Flask instance
+## Project Structure
 
----
+```text
+python-flask-car-routes-lab/
+├── images/
+│   └── tests-passing.png
+├── server/
+│   ├── app.py
+│   └── testing/
+│       ├── app_test.py
+│       └── conftest.py
+├── Pipfile
+├── Pipfile.lock
+├── pytest.ini
+└── README.md
+```
 
-### Task 5: Document and Maintain
+## Setup
 
-- Commit as you go, writing meaningful commit messages
-- Push commit history to GitHub periodically and when the lab is complete
+Install the project dependencies:
 
----
+```bash
+pipenv install
+```
 
-## Tools and Resources
+Enter the virtual environment:
 
-- **GitHub Repo**: [https://github.com/learn-co-curriculum/python-flask-car-routes-lab](https://github.com/learn-co-curriculum/python-flask-car-routes-lab)
-- **Flask Quickstart**: [https://flask.palletsprojects.com/en/stable/quickstart/](https://flask.palletsprojects.com/en/stable/quickstart/)
+```bash
+pipenv shell
+```
 
----
+The project uses Python 3.8.13.
 
-## Instructions
+## Running the Flask Application
 
-### Set Up
+From the project root, run:
 
-Before we begin coding, complete the initial setup:
+```bash
+python server/app.py
+```
 
-1. **Fork and Clone**
-   - Go to the GitHub repository link.
-   - Fork the repository to your GitHub account.
-   - Clone the forked repository to your local machine.
+The Flask development server runs on port `5555`.
 
-2. **Open and Run**
-   - Open the project in VSCode.
-   - Run `pipenv install` to install dependencies.
-   - Run `pipenv shell` to open a Python shell instance.
+Open the default route in a browser:
 
----
+```text
+http://127.0.0.1:5555/
+```
 
-## Task 1: Define the Problem
+You can also request a model:
 
-Build the following routes:
+```text
+http://127.0.0.1:5555/Beedle
+```
 
-- Default Route: `/`
-- Model Route: `/<model>`
+or:
 
----
+```text
+http://127.0.0.1:5555/Crossroads
+```
 
-## Task 2: Determine the Design
+## Testing
 
-### App Routes:
+Run the test suite with:
 
-- `/`  
-  - Returns: `"Welcome to Flatiron Cars"`
+```bash
+python -m pytest -v
+```
 
-- `/<model>`  
-  - Takes `model` variable from the URL  
-  - Uses the `model` variable to check against an `existing_models` array  
-    - If model exists:  
-      `"Flatiron {model} is in our fleet!"`  
-    - If model doesn't exist:  
-      `"No models called {model} exists in our catalog"`
+Current result:
 
----
+```text
+5 passed
+```
 
-## Task 3: Develop, Test, and Refine the Code
+The tests verify:
 
-1. Create a **feature branch**
-2. Build the following:
+- the `/` route exists,
+- the `/` route returns the expected welcome message,
+- the `/<model>` route exists,
+- available models return the expected fleet message,
+- unavailable models return the expected catalog message.
 
-### `/` Route
+## Completed Test Suite
 
-- Returns: `"Welcome to Flatiron Cars"`
+![Passing Flask route tests](images/tests-passing.png)
 
-### `/<model>` Route
+## Technologies
 
-- Accepts a model name from the URL
-- Uses the model variable to check the `existing_models` array
-  - If found: return `"Flatiron {model} is in our fleet!"`
-  - If not found: return `"No models called {model} exists in our catalog"`
+- Python
+- Flask
+- pytest
+- Pipenv
+- Git and GitHub
 
-3. Push the feature branch and open a PR on GitHub
-4. Merge into `main`
+## Author
 
----
-
-## Task 4: Document and Maintain
-
-### Best Practices:
-
-- Add comments explaining logic and purpose
-- Clarify code intent for future developers
-- Include a screenshot of completed work in the README
-- Update README to reflect functionality using [https://makeareadme.com](https://makeareadme.com)
-- Delete stale GitHub branches
-- Remove unused or commented-out code
-- Update `.gitignore` to exclude sensitive data (if needed)
-
----
-
-## Submission
-
-Once all tests are passing and code is pushed to the `main` branch:
-
-- Submit your GitHub repo through **Canvas** using **CodeGrade**
-
----
-
-## Grading Criteria
-
-- Application passes all test suites
-- `/` route is created and returns correctly
-- `/<model>` route is created and returns correctly
+Abraham Zarate
